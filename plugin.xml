@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.squirrel_lang.sqdev"
+   name="Sqdev Plug-in"
+   version="1.1.1"
+   provider-name="Alberto Demichelis"
+   class="org.squirrel_lang.sqdev.SQDevPlugin">
+
+   <runtime>
+      <library name="sqdev.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.debug.ui"/> 
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+	<extension
+         point="org.eclipse.ui.ide.resourceFilters">
+      <filter
+      		selected="true"
+            pattern="*.pdb">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.dll">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.lib">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.exe">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.ilk">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.dlb">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.dlu">
+      </filter>
+      <filter
+            selected="true"
+            pattern="*.exp">
+      </filter>
+   </extension>
+<!-- ==NATURE== -->
+   <extension
+         id="squirrelnature"
+         name="%extension.name"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.squirrel_lang.sqdev.SquirrelNature">
+         </run>
+      </runtime>
+   </extension>
+   
+<!-- ==NUT FILE== -->
+   <extension
+         point="org.eclipse.team.core.fileTypes">
+      <fileTypes
+            type="text"
+            extension="nut">
+      </fileTypes>
+   </extension>
+   
+<!-- ==PERSPECTIVE== -->
+ <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="%perspective.name"
+            icon="icons/obj16/squirrel.gif"
+            class="org.squirrel_lang.sqdev.SquirrelPerspective"
+            id="org.squirrel_lang.sqdev.SquirrelPerspective">
+      </perspective>
+  </extension>
+  
+  
+<!-- PROJECT WIZARD -->
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="%category.name"
+            id="org.squirrel_lang.sqdev.ui.wizards.NewWizardCategorySquirrel">
+      </category>
+      <wizard
+            name="%wizard.name"
+            icon="icons/obj16/squirrel.gif"
+            category="org.squirrel_lang.sqdev.ui.wizards.NewWizardCategorySquirrel"
+            class="org.squirrel_lang.sqdev.ui.wizards.NewProjectWizard"
+            project="true"
+            id="org.squirrel_lang.sqdev.ui.wizards.NewProjectWizard">
+         <description> 
+            %wizard.description
+         </description>
+      </wizard>
+   </extension>  
+<!-- ==EDITOR== -->
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%javaEditorName"
+            icon="icons/obj16/nut.gif"
+            extensions="nut"
+            contributorClass="org.squirrel_lang.sqdev.ui.editor.SquirrelActionContributor"
+            class="org.squirrel_lang.sqdev.ui.editor.SquirrelEditor"
+            id="org.squirrel_lang.sqdev.ui.editor.SquirrelEditor">
+      </editor>
+   </extension>
+   
+   <extension
+         id="SquirrelDocumentSetupParticipant"
+         name="%documentSetupParticipantName"
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            extensions="nut"
+            class="org.squirrel_lang.sqdev.ui.editor.SquirrelDocumentSetupParticipant">
+      </participant>
+   </extension>
+<!-- PROBLEMS MARKER -->
+	<extension 
+		point="org.eclipse.core.resources.markers"
+        name="%extension.name.0"
+		id="squirrelproblemmarker">
+	   <super type="org.eclipse.core.resources.problemmarker"/>
+	   <persistent value="true"/>
+	</extension>
+<!-- PREFERENCES -->
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="%page.name"
+            class="org.squirrel_lang.sqdev.ui.config.SquirrelBasePreferencePage"
+            id="org.squirrel_lang.sqdev.ui.config.SquirrelPreferencePage">
+      </page>
+   </extension>
+</plugin>

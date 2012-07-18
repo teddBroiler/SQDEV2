@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="all" name="SQDEV_fixed">
+
+	<property name="bin" value="bin" />
+	<property name="src" value="src" />
+	
+	<property name="binfile" value="sqdev.jar" />
+	
+	<target name="buildjar">
+		<jar destfile="${binfile}">
+			<zipfileset dir="${bin}">
+				<include name="**/*.properties" />
+				<include name="**/*.gif" />
+				<include name="**/*.class" />
+			</zipfileset>
+		</jar>
+	</target>
+	
+	
+	<target name="all">
+	    <antcall target="buildjar"/>
+	</target>
+</project>
